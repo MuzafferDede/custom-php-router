@@ -11,7 +11,7 @@ class AccountController
     {
         $person = new Person($name);
 
-        $view = View::make("person-detail")->with(["person" => $person]);
+        $view = View::use("person-detail")->with(["person" => $person]);
 
         return $view->render();
     }

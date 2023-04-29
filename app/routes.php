@@ -17,7 +17,7 @@ Router::get('/user/{id}', function ($id) {
 
 Router::get('/', function () {
     $person = new Person("Ian the PHP master!");
-    return View::make("person-detail")->with("person", $person)->render();
+    return View::use("person-detail")->with("person", $person)->render();
 });
 
 Router::get('/person/{name}', [AccountController::class, 'index']);

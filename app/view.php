@@ -13,7 +13,7 @@ class View
         $this->data = $data;
     }
 
-    public static function make($view)
+    public static function use($view)
     {
         return new static($view);
     }
