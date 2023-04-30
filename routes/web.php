@@ -7,14 +7,6 @@ use App\View;
 
 // use Router with get, post, put, delete
 
-Router::get('/user/{id}', function ($id) {
-    $data = ["id" => $id];
-    $json = json_encode($data);
-
-    header('Content-Type: application/json');
-    echo $json;
-});
-
 Router::get('/', function () {
     $person = new Person("Ian the PHP master!");
     return View::use("person-detail")->with("person", $person)->render();
