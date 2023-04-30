@@ -10,7 +10,5 @@
       "name": "Muzaffer"
     }
   ],
-  "require": {
-    "jenssegers/blade": "^1.4"
-  }
+  "require": {}
 }
