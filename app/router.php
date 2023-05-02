@@ -16,20 +16,15 @@ class Router
 
     public static function dispatch($method, $uri)
     {
-        $queryParams = [];
-        $parsedUri = parse_url($uri);
-        $path = $parsedUri['path'];
-        if (isset($parsedUri['query'])) {
-            parse_str($parsedUri['query'], $queryParams);
-        }
+        $uri = explode('?', $uri)[0];
 
         foreach (self::$routes as $route) {
             list($routeMethod, $routePath, $handler) = $route;
-            $pattern = preg_replace('/{(\w+)}/', '([^\/?]+)', $routePath);
+            $pattern = preg_replace('/{(\w+)}/', '([^\/]+)', $routePath);
             $pattern = '#^' . $pattern . '$#';
-            if ($method === $routeMethod && preg_match($pattern, $path, $matches)) {
+            if ($method === $routeMethod && preg_match($pattern, $uri, $matches)) {
                 array_shift($matches);
-                $args = array_merge($matches, [$queryParams]);
+                $args = array_merge($matches, [$_GET, $_POST]);
                 if (is_array($handler)) {
                     $controller = new $handler[0];
                     $method = $handler[1];
