@@ -13,3 +13,5 @@ Router::get('/', function () {
 });
 
 Router::get('/person/{name}', [AccountController::class, 'index']);
+
+Router::post('/person', [AccountController::class, 'store']);

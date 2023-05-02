@@ -14,6 +14,10 @@
         <div class="text-3xl">
             <span class="text-rose-500">Hello</span> <span class="text-amber-300"><?= $person->name ?></span> 👋
         </div>
+        <form action="/person?getData=get data" method="post">
+            <input type="text" name="postData" placeholder="Enter your name" value="post data">
+            <button>Submit</button>
+        </form>
     </div>
 </body>
 

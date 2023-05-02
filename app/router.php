@@ -16,21 +16,19 @@ class Router
 
     public static function dispatch($method, $uri)
     {
-        $uri = explode('?', $uri)[0];
-
         foreach (self::$routes as $route) {
+            $uri =   $uri = explode('?', $uri)[0];
             list($routeMethod, $routePath, $handler) = $route;
             $pattern = preg_replace('/{(\w+)}/', '([^\/]+)', $routePath);
             $pattern = '#^' . $pattern . '$#';
             if ($method === $routeMethod && preg_match($pattern, $uri, $matches)) {
                 array_shift($matches);
-                $args = array_merge($matches, [$_GET, $_POST]);
                 if (is_array($handler)) {
                     $controller = new $handler[0];
                     $method = $handler[1];
-                    return call_user_func_array([$controller, $method], $args);
+                    return call_user_func_array([$controller, $method], $matches);
                 } else {
-                    return call_user_func_array($handler, $args);
+                    return call_user_func_array($handler, $matches);
                 }
             }
         }
